@@ -4,6 +4,7 @@ import { MapView, Permissions, Location } from 'expo';
 
 import { DestinationButton } from './components/DestinationButton';
 import { CurrentLocationButton } from './components/CurrentLocationButton';
+import { Driver } from './components/Driver';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -53,14 +54,19 @@ export default class App extends React.Component {
       <Text>Homescreen</Text>
       <DestinationButton />
       <CurrentLocationButton cb={() => { this.centerMap() }}/>
+      
       <MapView 
         initalRegion={this.state.region}
         showsUserLocation={true}
         showsCompass={true}
         rotateEnabled={false}
         ref={(map) => {this.map = map}}
-        style={{flex: 1}}
-      />
+        style={{flex: 1}}>
+      <Driver driver={{uid: 'null', location: {
+        latitude: 36.102820,
+        longitude: -86.817040,
+      }}} />
+      </MapView>
     </View>
   );
   }
