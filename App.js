@@ -2,56 +2,59 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { MapView, Permissions, Location } from 'expo';
 
-import { DestinationButton } from './components/DestinationButton';
-import { CurrentLocationButton } from './components/CurrentLocationButton';
-import { Driver } from './components/Driver';
+// import { DestinationButton } from './components/DestinationButton';
+// import { CurrentLocationButton } from './components/CurrentLocationButton';
+// import { Driver } from './components/Driver';
+
+import { HomeScreen } from './screens/HomeScreen';
 
 export default class App extends React.Component {
-  constructor(props) {
-    super(props);
+  // constructor(props) {
+  //   super(props);
 
-    this.state = {
-      region: null,
-    }
+  //   this.state = {
+  //     region: null,
+  //   }
 
-    this._getLocationAsync();
-  }
+  //   this._getLocationAsync();
+  // }
 
-  _getLocationAsync = async () => {
-   let { status } = await Permissions.askAsync(Permissions.LOCATION);
-    if(status !== 'granted')
-      console.log('Permission to access location was denied.');
+  // _getLocationAsync = async () => {
+  //  let { status } = await Permissions.askAsync(Permissions.LOCATION);
+  //   if(status !== 'granted')
+  //     console.log('Permission to access location was denied.');
       
-   let location = await Location.getCurrentPositionAsync({enabledHighAccuracy: true});
-   let region = {
-     latitude: location.coords.latitude,
-     longitude: location.coords.longitude,
-     latitudeDelta: 0.045,
-     longitudeDelta: 0.045,
-   }
+  //  let location = await Location.getCurrentPositionAsync({enabledHighAccuracy: true});
+  //  let region = {
+  //    latitude: location.coords.latitude,
+  //    longitude: location.coords.longitude,
+  //    latitudeDelta: 0.045,
+  //    longitudeDelta: 0.045,
+  //  }
    
-   this.setState({region: region})
-  }
+  //  this.setState({region: region})
+  // }
 
-  centerMap () {
-    const { 
-      latitude, 
-      longitude, 
-      latitudeDelta, 
-      longitudeDelta} = this.state.region;
+  // centerMap () {
+  //   const { 
+  //     latitude, 
+  //     longitude, 
+  //     latitudeDelta, 
+  //     longitudeDelta} = this.state.region;
 
-    this.map.animateToRegion({
-      latitude,
-      longitude, 
-      latitudeDelta, 
-      longitudeDelta
-    })
-  }
+  //   this.map.animateToRegion({
+  //     latitude,
+  //     longitude, 
+  //     latitudeDelta, 
+  //     longitudeDelta
+  //   })
+  // }
 
   render() {
   return (
     <View style={styles.container}>
-      <Text>Homescreen</Text>
+      <HomeScreen />
+      {/* <Text>Homescreen</Text>
       <DestinationButton />
       <CurrentLocationButton cb={() => { this.centerMap() }}/>
       
@@ -66,7 +69,7 @@ export default class App extends React.Component {
         latitude: 36.102820,
         longitude: -86.817040,
       }}} />
-      </MapView>
+      </MapView> */}
     </View>
   );
   }
