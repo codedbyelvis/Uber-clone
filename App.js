@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { MapView, Permissions, Location } from 'expo';
 
 import { DestinationButton } from './components/DestinationButton';
+import { CurrentLocationButton } from './components/CurrentLocationButton';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -31,16 +32,33 @@ export default class App extends React.Component {
    this.setState({region: region})
   }
 
+  centerMap () {
+    const { 
+      latitude, 
+      longitude, 
+      latitudeDelta, 
+      longitudeDelta} = this.state.region;
+
+    this.map.animateToRegion({
+      latitude,
+      longitude, 
+      latitudeDelta, 
+      longitudeDelta
+    })
+  }
+
   render() {
   return (
     <View style={styles.container}>
       <Text>Homescreen</Text>
       <DestinationButton />
+      <CurrentLocationButton cb={() => { this.centerMap() }}/>
       <MapView 
         initalRegion={this.state.region}
         showsUserLocation={true}
         showsCompass={true}
         rotateEnabled={false}
+        ref={(map) => {this.map = map}}
         style={{flex: 1}}
       />
     </View>
